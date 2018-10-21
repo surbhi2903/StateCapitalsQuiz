@@ -3,35 +3,82 @@ package edu.uga.cs.statecapitalsquiz;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.provider.BaseColumns;
+import android.util.Log;
 
 public class DBManager extends SQLiteOpenHelper {
+    private static final String DEBUG_TAG = "JobLeadsDBHelper";
     static final String DATABASE_NAME = "states.db";
-    public static final String TABLE_NAME = "States_Quiz";
-    public static final String COLUMN_STATE = "State";
-    public static final String COLUMN_CITY1 = "City 1";
-    public static final String COLUMN_CITY2 = "City 2";
-    public static final String COLUMN_CITY3 = "City 3";
+    private static final int DB_VERSION = 1;
 
-    public static final String SQL_CREATE_STATES_TABLE = "CREATE TABLE " + TABLE_NAME +
-            "(" + BaseColumns._ID + " INTEGER PRIMARY KEY, " +
-            COLUMN_STATE + " REAL NOT NULL, " +
-            COLUMN_CITY1 + " REAL NOT NULL, " +
-            COLUMN_CITY2 + " REAL NOT NULL, " +
-            COLUMN_CITY3 + " REAL NOT NULL );";
+    public static final String TABLE_NAME_STATES_QUIZ = "States_Quiz";
+    public static final String COLUMN_ID = "id";
+    public static final String COLUMN_STATE = "state";
+    public static final String COLUMN_CITY1 = "city1";
+    public static final String COLUMN_CITY2 = "city2";
+    public static final String COLUMN_CITY3 = "city3";
+
+    public static final String TABLE_NAME_STORE_QUIZ = "Store_Quiz";
+    public static final String COLUMN_QUIZ_ID = "quizId";
+    public static final String COLUMN_QUIZ_DATE = "quizDate";
+    public static final String COLUMN_QUESTION1 = "question1";
+    public static final String COLUMN_QUESTION2 = "question2";
+    public static final String COLUMN_QUESTION3 = "question3";
+    public static final String COLUMN_QUESTION4 = "question4";
+    public static final String COLUMN_QUESTION5 = "question5";
+    public static final String COLUMN_QUESTION6 = "question6";
+    public static final String COLUMN_CORRECT_ANSWERS = "correctAnswers";
+
+    private static DBManager helperInstance;
+
+    public static final String CREATE_STATES_TABLE =
+            "create table " + TABLE_NAME_STATES_QUIZ + " ("
+                    + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    + COLUMN_STATE + " TEXT, "
+                    + COLUMN_CITY1 + " TEXT, "
+                    + COLUMN_CITY2 + " TEXT, "
+                    + COLUMN_CITY3 + " TEXT"
+                    + ")";
+
+    public static final String CREATE_STORE_QUIZ_TABLE =
+            "create table " + TABLE_NAME_STORE_QUIZ + " ("
+                    + COLUMN_QUIZ_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    + COLUMN_QUIZ_DATE + " TEXT, "
+                    + COLUMN_QUESTION1 + " TEXT, "
+                    + COLUMN_QUESTION2 + " TEXT, "
+                    + COLUMN_QUESTION3 + " TEXT, "
+                    + COLUMN_QUESTION4 + " TEXT, "
+                    + COLUMN_QUESTION5 + " TEXT, "
+                    + COLUMN_QUESTION6 + " TEXT, "
+                    + COLUMN_CORRECT_ANSWERS + " INTEGER"
+                    + ")";
 
     public DBManager(Context context) {
-        super(context, DATABASE_NAME, null, 1);
+        super(context, DATABASE_NAME, null, DB_VERSION);
+    }
+
+    public static synchronized DBManager getInstance( Context context ) {
+        if( helperInstance == null ) {
+            helperInstance = new DBManager( context.getApplicationContext() );
+        }
+        return helperInstance;
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL(SQL_CREATE_STATES_TABLE);
+        sqLiteDatabase.execSQL(CREATE_STATES_TABLE);
+        Log.d( DEBUG_TAG, "Table " + TABLE_NAME_STATES_QUIZ + " created" );
+        sqLiteDatabase.execSQL(CREATE_STORE_QUIZ_TABLE);
+        Log.d( DEBUG_TAG, "Table " + TABLE_NAME_STORE_QUIZ + " created" );
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_STATES_QUIZ);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_STORE_QUIZ);
         onCreate(db);
+        Log.d( DEBUG_TAG, "Table " + TABLE_NAME_STATES_QUIZ + " upgraded" );
+        Log.d( DEBUG_TAG, "Table " + TABLE_NAME_STORE_QUIZ + " upgraded" );
     }
+
+
 }
