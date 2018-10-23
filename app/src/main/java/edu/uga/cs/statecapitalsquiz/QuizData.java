@@ -16,14 +16,17 @@ public class QuizData {
 
     private SQLiteDatabase db;
     private SQLiteOpenHelper quizDbHelper;
+    
     private static final String[] allColumns = {
             DBManager.COLUMN_QUIZ_ID,
+            DBManager.COLUMN_QUIZ_DATE,
             DBManager.COLUMN_QUESTION1,
             DBManager.COLUMN_QUESTION2,
             DBManager.COLUMN_QUESTION3,
             DBManager.COLUMN_QUESTION4,
             DBManager.COLUMN_QUESTION5,
-            DBManager.COLUMN_QUESTION6
+            DBManager.COLUMN_QUESTION6,
+            DBManager.COLUMN_CORRECT_ANSWERS
     };
 
     public QuizData(Context context) {
