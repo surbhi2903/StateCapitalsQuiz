@@ -28,6 +28,13 @@ public class QuizData {
             DBManager.COLUMN_CORRECT_ANSWERS
     };
 
+    private static final String[] allParams = {
+            DBManager.COLUMN_STATE,
+            DBManager.COLUMN_CITY1,
+            DBManager.COLUMN_CITY2,
+            DBManager.COLUMN_CITY3
+    };
+
     public QuizData(Context context) {
         this.quizDbHelper = DBManager.getInstance(context);
     }
@@ -42,11 +49,40 @@ public class QuizData {
         }
     }
 
+    public List<QuizQuestion> retrieveNewQuiz() {
+        ArrayList<QuizQuestion> questions = new ArrayList<>();
+        Cursor cursor = null;
+        try {
+            cursor = db.query(DBManager.TABLE_NAME_STATES_QUIZ, allParams,
+                    null, null, null, null, "RANDOM() limit 1");
+            while (cursor.moveToNext()) {
+                long id = cursor.getLong(cursor.getColumnIndex(DBManager.COLUMN_ID));
+                String questionState = cursor.getString(cursor.getColumnIndex(DBManager.COLUMN_STATE));
+                String answerOne = cursor.getString(cursor.getColumnIndex(DBManager.COLUMN_CITY1));
+                String answerTwo = cursor.getString(cursor.getColumnIndex(DBManager.COLUMN_CITY2));
+                String answerThree = cursor.getString(cursor.getColumnIndex(DBManager.COLUMN_CITY3));
+                QuizQuestion question = new QuizQuestion(questionState, answerOne, answerTwo, answerThree);
+                question.setId(id);
+                questions.add(question);
+            }
+
+        }
+        catch (Exception e) {
+            Log.d( DEBUG_TAG, "Exception caught: " + e);
+        }
+        finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        return questions;
+    }
+
     public List<Quiz> retrieveAllQuizzes() {
         ArrayList<Quiz> quizzes = new ArrayList<>();
         Cursor cursor = null;
         try {
-            cursor = db.query(DBManager.TABLE_NAME_STATES_QUIZ, allColumns,
+            cursor = db.query(DBManager.TABLE_NAME_STORE_QUIZ, allColumns,
                     null, null, null, null, null);
 
             if (cursor.getCount() > 0) {
