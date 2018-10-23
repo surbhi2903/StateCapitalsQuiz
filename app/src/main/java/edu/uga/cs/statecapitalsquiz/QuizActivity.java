@@ -3,6 +3,8 @@ package edu.uga.cs.statecapitalsquiz;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -14,14 +16,11 @@ public class QuizActivity extends AppCompatActivity {
 
     public static final String DEBUG_TAG="QuizActivity";
 
-    private TextView quizQuestion;
-    private RadioGroup answerChoices;
-    private RadioButton answerOne;
-    private RadioButton answerTwo;
-    private RadioButton answerThree;
+    private RecyclerView recyclerView;
+    private RecyclerView.LayoutManager layoutManager;
+    private RecyclerView.Adapter recyclerAdapter;
 
     private QuizData quizData = null;
-
     private List<Quiz> quizList;
     private List<QuizQuestion> newQuiz;
 
@@ -30,11 +29,11 @@ public class QuizActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
-        quizQuestion = (TextView) findViewById(R.id.questionField);
-        answerChoices = (RadioGroup) findViewById(R.id.answerGroup);
-        answerOne = (RadioButton) findViewById(R.id.answer1);
-        answerTwo = (RadioButton) findViewById(R.id.answer2);
-        answerThree = (RadioButton) findViewById(R.id.answer3);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
 
         quizData = new QuizData(this);
 
@@ -53,8 +52,8 @@ public class QuizActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(List<QuizQuestion> quizList) {
             super.onPostExecute(quizList);
-
-
+            recyclerAdapter = new QuizRecyclerAdapter(quizList);
+            recyclerView.setAdapter(recyclerAdapter);
         }
     }
     @Override
@@ -73,3 +72,4 @@ public class QuizActivity extends AppCompatActivity {
     }
 
 }
+
