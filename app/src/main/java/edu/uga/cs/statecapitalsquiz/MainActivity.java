@@ -1,6 +1,7 @@
 package edu.uga.cs.statecapitalsquiz;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -56,14 +57,20 @@ public class MainActivity extends AppCompatActivity {
         }
 
         Button button_csv = (Button) findViewById(R.id.button);
-        button_csv.setOnClickListener(new ButtonClickListener());
+        button_csv.setOnClickListener(new QuizClickListener());
     }
 
-    private class ButtonClickListener implements View.OnClickListener {
+    private class QuizClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-
-
+            Intent intent = new Intent(v.getContext(), QuizActivity.class);
+            v.getContext().startActivity(intent);
+        }
+    }
+    private class ScoreClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+        
         }
     }
 }
