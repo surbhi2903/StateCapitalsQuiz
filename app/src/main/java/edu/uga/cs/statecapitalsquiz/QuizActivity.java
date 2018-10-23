@@ -3,6 +3,7 @@ package edu.uga.cs.statecapitalsquiz;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -22,7 +23,7 @@ public class QuizActivity extends AppCompatActivity {
     private QuizData quizData = null;
 
     private List<Quiz> quizList;
-    private QuizQuestion newQuiz;
+    private List<QuizQuestion> newQuiz;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,20 +37,39 @@ public class QuizActivity extends AppCompatActivity {
         answerThree = (RadioButton) findViewById(R.id.answer3);
 
         quizData = new QuizData(this);
+
+        new RetrieveQuizTask().execute();
     }
 
-    public class RetrieveQuizTask extends AsyncTask<Void, Void, List<Quiz>> {
+    public class RetrieveQuizTask extends AsyncTask<Void, Void, List<QuizQuestion>> {
 
         @Override
-        protected List<Quiz> doInBackground(Void... params) {
+        protected List<QuizQuestion> doInBackground(Void... params) {
             quizData.open();
-            quizList = quizData.retrieveAllQuizzes();
-            return quizList;
+            newQuiz = quizData.retrieveNewQuiz();
+            return newQuiz;
         }
 
         @Override
-        protected void onPostExecute(List<Quiz> quizList) {
+        protected void onPostExecute(List<QuizQuestion> quizList) {
+            super.onPostExecute(quizList);
+
 
         }
     }
+    @Override
+    protected void onResume() {
+        Log.d(DEBUG_TAG, "");
+        if (quizData != null)
+            quizData.open();
+        super.onResume();
+    }
+
+    protected void onPause() {
+        Log.d(DEBUG_TAG,"");
+        if (quizData != null)
+            quizData.close();
+        super.onPause();
+    }
+
 }
