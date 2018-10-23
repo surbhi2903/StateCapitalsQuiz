@@ -29,6 +29,7 @@ public class QuizData {
     };
 
     private static final String[] allParams = {
+            DBManager.COLUMN_ID,
             DBManager.COLUMN_STATE,
             DBManager.COLUMN_CITY1,
             DBManager.COLUMN_CITY2,
