@@ -46,7 +46,7 @@ public class QuizRecyclerAdapter extends RecyclerView.Adapter<QuizRecyclerAdapte
     public void onBindViewHolder(QuizHolder holder, int position) {
         QuizQuestion quizQuestion = quizQuestions.get(position);
 
-        holder.stateName.setText(quizQuestion.getQuestion());
+        holder.stateName.setText("What is the capital of " + quizQuestion.getQuestion() + "?");
         holder.cityOne.setText(quizQuestion.getAnswerOne());
         holder.cityTwo.setText(quizQuestion.getAnswerTwo());
         holder.cityThree.setText(quizQuestion.getAnswerThree());
