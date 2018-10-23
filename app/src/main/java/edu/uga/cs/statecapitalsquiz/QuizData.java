@@ -16,7 +16,6 @@ public class QuizData {
 
     private SQLiteDatabase db;
     private SQLiteOpenHelper quizDbHelper;
-    
     private static final String[] allColumns = {
             DBManager.COLUMN_QUIZ_ID,
             DBManager.COLUMN_QUIZ_DATE,
@@ -61,6 +60,7 @@ public class QuizData {
                     String q5 = cursor.getString(cursor.getColumnIndex(DBManager.COLUMN_QUESTION5));
                     String q6 = cursor.getString(cursor.getColumnIndex(DBManager.COLUMN_QUESTION6));
                     int correctAnswers = cursor.getInt(cursor.getColumnIndex(DBManager.COLUMN_CORRECT_ANSWERS));
+
                     Quiz quiz = new Quiz(quizDate,q1,q2,q3,q4,q5,q6,correctAnswers);
                     quiz.setId(id);
                     quizzes.add(quiz);
