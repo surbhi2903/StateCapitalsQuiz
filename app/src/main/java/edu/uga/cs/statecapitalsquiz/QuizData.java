@@ -55,7 +55,7 @@ public class QuizData {
         Cursor cursor = null;
         try {
             cursor = db.query(DBManager.TABLE_NAME_STATES_QUIZ, allParams,
-                    null, null, null, null, "RANDOM() limit 1");
+                    null, null, null, null, "RANDOM() limit 6");
             while (cursor.moveToNext()) {
                 long id = cursor.getLong(cursor.getColumnIndex(DBManager.COLUMN_ID));
                 String questionState = cursor.getString(cursor.getColumnIndex(DBManager.COLUMN_STATE));
