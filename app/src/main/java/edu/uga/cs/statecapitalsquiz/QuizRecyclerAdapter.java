@@ -5,7 +5,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import java.util.List;
@@ -21,17 +23,39 @@ public class QuizRecyclerAdapter extends RecyclerView.Adapter<QuizRecyclerAdapte
     class QuizHolder extends RecyclerView.ViewHolder {
 
         TextView stateName;
+        RadioGroup radioGroup;
         RadioButton cityOne;
         RadioButton cityTwo;
         RadioButton cityThree;
+        RadioButton selectedButton;
+        Button button;
 
-        public QuizHolder(View itemView) {
+        public QuizHolder(final View itemView) {
             super(itemView);
 
             stateName = (TextView) itemView.findViewById(R.id.stateName);
+            radioGroup = (RadioGroup) itemView.findViewById(R.id.radio);
             cityOne = (RadioButton) itemView.findViewById(R.id.stateOne);
             cityTwo = (RadioButton) itemView.findViewById(R.id.stateTwo);
             cityThree = (RadioButton) itemView.findViewById(R.id.stateThree);
+            button = (Button) itemView.findViewById(R.id.button);
+
+            button.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    String checkAnswer;
+                    int selectedId = radioGroup.getCheckedRadioButtonId();
+                    selectedButton = (RadioButton) itemView.findViewById(selectedId);
+                    if(selectedButton == cityOne) {
+                        checkAnswer = "true";
+                    } else {
+                        checkAnswer = "false";
+                    }
+
+                }
+            });
         }
 
     }

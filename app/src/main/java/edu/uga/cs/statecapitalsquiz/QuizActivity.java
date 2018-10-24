@@ -42,6 +42,7 @@ public class QuizActivity extends AppCompatActivity {
 
     public class RetrieveQuizTask extends AsyncTask<Void, Void, List<QuizQuestion>> {
 
+        // This method will run as a background process to write into db.
         @Override
         protected List<QuizQuestion> doInBackground(Void... params) {
             quizData.open();
@@ -49,6 +50,8 @@ public class QuizActivity extends AppCompatActivity {
             return newQuiz;
         }
 
+        // This method will be automatically called by Android once the db writing
+        // background process is finished.
         @Override
         protected void onPostExecute(List<QuizQuestion> quizList) {
             super.onPostExecute(quizList);

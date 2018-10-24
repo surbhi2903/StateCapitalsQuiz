@@ -15,6 +15,8 @@ import java.io.InputStreamReader;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String MESSAGE_TYPE = "edu.uga.cs.StateCapitalsQuiz.MESSAGE_TYPE";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +72,11 @@ public class MainActivity extends AppCompatActivity {
     private class ScoreClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-        
+            //Create specific intents to start an activity.
+            Intent quizResultsIntent = new Intent(v.getContext(), QuizResultActivity.class);
+            startActivity(quizResultsIntent);
+            quizResultsIntent.putExtra(MESSAGE_TYPE, "Hello World");
+            v.getContext().startActivity(quizResultsIntent);
         }
     }
 }
