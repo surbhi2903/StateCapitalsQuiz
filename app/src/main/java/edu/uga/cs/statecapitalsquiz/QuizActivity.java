@@ -1,11 +1,16 @@
 package edu.uga.cs.statecapitalsquiz;
 
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PagerSnapHelper;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -31,13 +36,43 @@ public class QuizActivity extends AppCompatActivity {
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
-        layoutManager = new LinearLayoutManager(this);
-        
-        recyclerView.setLayoutManager(new LinearLayoutManager(this,
-                LinearLayoutManager.HORIZONTAL, false));
+        layoutManager = new LinearLayoutManager(this,
+                LinearLayoutManager.HORIZONTAL, false);
 
-        PagerSnapHelper snapHelper = new PagerSnapHelper();
+
+        recyclerView.setLayoutManager(layoutManager);
+
+        final PagerSnapHelper snapHelper = new PagerSnapHelper();
         snapHelper.attachToRecyclerView(recyclerView);
+
+        final ItemTouchHelper.SimpleCallback simpleTouch = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+
+            }
+        };
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleTouch);
+        itemTouchHelper.attachToRecyclerView(recyclerView);
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    View view = snapHelper.findSnapView(layoutManager);
+                    int pos = layoutManager.getPosition(view);
+                    Log.e("Item position at: " ,""+ pos);
+
+                }
+            }
+        });
+
 
 
         quizData = new QuizData(this);
@@ -80,4 +115,3 @@ public class QuizActivity extends AppCompatActivity {
     }
 
 }
-
