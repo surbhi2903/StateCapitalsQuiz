@@ -42,7 +42,22 @@ public class QuizActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(layoutManager);
 
+
+
         final PagerSnapHelper snapHelper = new PagerSnapHelper();
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    View view = snapHelper.findSnapView(layoutManager);
+                    int pos = layoutManager.getPosition(view);
+                    Log.e("Item position at: " ,""+ pos);
+
+                }
+            }
+        });
+
         snapHelper.attachToRecyclerView(recyclerView);
 
         final ItemTouchHelper.SimpleCallback simpleTouch = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
@@ -60,24 +75,18 @@ public class QuizActivity extends AppCompatActivity {
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleTouch);
         itemTouchHelper.attachToRecyclerView(recyclerView);
 
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    View view = snapHelper.findSnapView(layoutManager);
-                    int pos = layoutManager.getPosition(view);
-                    Log.e("Item position at: " ,""+ pos);
-
-                }
-            }
-        });
-
-
 
         quizData = new QuizData(this);
 
         new RetrieveQuizTask().execute();
+    }
+
+    public void removeQuestion(int pos) {
+        newQuiz.remove(pos);
+        recyclerView.removeViewAt(pos);
+        recyclerAdapter.notifyItemRemoved(pos);
+        recyclerAdapter.notifyItemRangeChanged(pos, newQuiz.size());
+        recyclerAdapter.notifyDataSetChanged();
     }
 
     public class RetrieveQuizTask extends AsyncTask<Void, Void, List<QuizQuestion>> {
