@@ -1,7 +1,7 @@
-
 package edu.uga.cs.statecapitalsquiz;
 
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +45,7 @@ public class QuizRecyclerAdapter extends RecyclerView.Adapter<QuizRecyclerAdapte
                 @Override
                 public void onClick(View v)
                 {
+
                     String checkAnswer;
                     int selectedId = radioGroup.getCheckedRadioButtonId();
                     selectedButton = (RadioButton) itemView.findViewById(selectedId);
@@ -65,6 +66,14 @@ public class QuizRecyclerAdapter extends RecyclerView.Adapter<QuizRecyclerAdapte
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.quiz_question, null);
         return new QuizHolder(view);
     }
+
+    /*
+    @Override
+    public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+         final int swipeFlags = ItemTouchHelper.END;
+         return makeMovementFlags
+    }
+*/
 
     @Override
     public void onBindViewHolder(QuizHolder holder, int position) {
