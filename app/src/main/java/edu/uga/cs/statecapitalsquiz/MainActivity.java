@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         DBManager helper = new DBManager(getApplicationContext());
         SQLiteDatabase db = helper.getWritableDatabase();
 
@@ -60,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
 
         Button button_csv = (Button) findViewById(R.id.button);
         button_csv.setOnClickListener(new QuizClickListener());
+        Button results = (Button) findViewById(R.id.button2);
+        results.setOnClickListener(new ScoreClickListener());
     }
 
     private class QuizClickListener implements View.OnClickListener {
@@ -74,8 +77,6 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
             //Create specific intents to start an activity.
             Intent quizResultsIntent = new Intent(v.getContext(), QuizResultActivity.class);
-            startActivity(quizResultsIntent);
-            quizResultsIntent.putExtra(MESSAGE_TYPE, "Hello World");
             v.getContext().startActivity(quizResultsIntent);
         }
     }
