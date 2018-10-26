@@ -1,5 +1,6 @@
 package edu.uga.cs.statecapitalsquiz;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +16,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 public class QuizActivity extends AppCompatActivity {
@@ -25,68 +28,50 @@ public class QuizActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter recyclerAdapter;
 
+
+    @Override
+    public Context getApplicationContext() {
+        return super.getApplicationContext();
+    }
+
     private QuizData quizData = null;
-    private List<Quiz> quizList;
+    private Quiz quizResult;
     private List<QuizQuestion> newQuiz;
+    private TextView stateName;
+    private RadioButton cityOne;
+    private RadioButton cityTwo;
+    private RadioButton cityThree;
+    private RadioGroup answerGroup;
+    private int numCorrect = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
-
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
         layoutManager = new LinearLayoutManager(this,
                 LinearLayoutManager.HORIZONTAL, false);
 
+        stateName = (TextView) findViewById(R.id.stateName);
+        answerGroup = (RadioGroup) findViewById(R.id.radio);
+
 
         recyclerView.setLayoutManager(layoutManager);
-
-
-
         final PagerSnapHelper snapHelper = new PagerSnapHelper();
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    View view = snapHelper.findSnapView(layoutManager);
-                    int pos = layoutManager.getPosition(view);
-                    Log.e("Item position at: " ,""+ pos);
-
-                }
-            }
-        });
 
         snapHelper.attachToRecyclerView(recyclerView);
-
-        final ItemTouchHelper.SimpleCallback simpleTouch = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
-            @Override
-            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {
-                return false;
-            }
-
-            @Override
-            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-
-            }
-        };
-
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleTouch);
-        itemTouchHelper.attachToRecyclerView(recyclerView);
-
-
         quizData = new QuizData(this);
-
         new RetrieveQuizTask().execute();
     }
 
-    public void removeQuestion(int pos) {
-        newQuiz.remove(pos);
-        recyclerView.removeViewAt(pos);
-        recyclerAdapter.notifyItemRemoved(pos);
-        recyclerAdapter.notifyItemRangeChanged(pos, newQuiz.size());
-        recyclerAdapter.notifyDataSetChanged();
+
+
+    private class ButtonClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+
+        }
     }
 
     public class RetrieveQuizTask extends AsyncTask<Void, Void, List<QuizQuestion>> {
@@ -99,15 +84,31 @@ public class QuizActivity extends AppCompatActivity {
             return newQuiz;
         }
 
+
         // This method will be automatically called by Android once the db writing
         // background process is finished.
         @Override
         protected void onPostExecute(List<QuizQuestion> quizList) {
             super.onPostExecute(quizList);
-            recyclerAdapter = new QuizRecyclerAdapter(quizList);
+            recyclerAdapter = new QuizRecyclerAdapter(quizList, getApplicationContext());
             recyclerView.setAdapter(recyclerAdapter);
         }
     }
+
+    private class CreateQuizTask extends AsyncTask<Quiz, Void, Quiz> {
+
+        @Override
+        protected Quiz doInBackground(Quiz... quiz) {
+            quizData.storeQuiz(quiz[0]);
+            return quiz[0];
+        }
+
+        @Override
+        protected void onPostExecute(Quiz quiz) {
+            super.onPostExecute(quiz);
+        }
+    }
+
     @Override
     protected void onResume() {
         Log.d(DEBUG_TAG, "");
@@ -122,5 +123,4 @@ public class QuizActivity extends AppCompatActivity {
             quizData.close();
         super.onPause();
     }
-
 }
