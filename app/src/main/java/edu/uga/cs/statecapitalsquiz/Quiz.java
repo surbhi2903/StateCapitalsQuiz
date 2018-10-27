@@ -61,7 +61,7 @@ public class Quiz {
 
     public String getQ4() { return q4;}
 
-    public void setQ4() { this.q4 = q4;}
+    public void setQ4(String q4) { this.q4 = q4;}
 
     public String getQ5() { return q5;}
 

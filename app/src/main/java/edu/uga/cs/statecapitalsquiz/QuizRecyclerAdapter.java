@@ -16,7 +16,9 @@ import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class QuizRecyclerAdapter extends RecyclerView.Adapter<QuizRecyclerAdapter.QuizHolder> {
 
@@ -25,6 +27,8 @@ public class QuizRecyclerAdapter extends RecyclerView.Adapter<QuizRecyclerAdapte
     private List<QuizQuestion> quizQuestions;
     private Context context;
     private RadioGroup lastCheckedRadioGroup = null;
+    private Map<Integer,Boolean> answers = new HashMap<>();
+    private boolean quizSubmitted = false;
 
 
     public QuizRecyclerAdapter(List<QuizQuestion> quizQuestions, Context ctx) {
@@ -43,6 +47,8 @@ public class QuizRecyclerAdapter extends RecyclerView.Adapter<QuizRecyclerAdapte
         RadioButton selectedButton;
         Button button;
         int score = 0;
+        QuizQuestion currentQuizQuestion;
+        int currentQuestionNumber;
 
 
         public QuizHolder(final View itemView) {
@@ -69,7 +75,20 @@ public class QuizRecyclerAdapter extends RecyclerView.Adapter<QuizRecyclerAdapte
                         lastCheckedRadioGroup.clearCheck();
                     }
                     lastCheckedRadioGroup = radioGroup;
-                    Log.d(DEBUG_TAG, "ID " + radioGroup.getCheckedRadioButtonId());
+                    //Log.d(DEBUG_TAG, "ID " + radioGroup.getCheckedRadioButtonId());
+
+                    int selectedId = radioGroup.getCheckedRadioButtonId();
+                    selectedButton = (RadioButton) itemView.findViewById(selectedId);
+                    if( selectedButton != null) {
+                        // By default correct answer is always option one.
+                        if( selectedButton.getText().equals(currentQuizQuestion.getAnswerOne())){
+                            answers.put(currentQuestionNumber,Boolean.TRUE);
+                        } else {
+                            answers.put(currentQuestionNumber,Boolean.FALSE);
+                        }
+
+                    }
+
                 }
             });
 
@@ -91,15 +110,84 @@ public class QuizRecyclerAdapter extends RecyclerView.Adapter<QuizRecyclerAdapte
     @Override
     public void onBindViewHolder(QuizHolder holder, int position) {
         QuizQuestion quizQuestion = quizQuestions.get(position);
+        holder.currentQuizQuestion = quizQuestion;
+        holder.currentQuestionNumber = position + 1;
         int id = position;
         int score = 0;
         if (position != 5) {
             holder.button.setVisibility(View.GONE);
         }
+
         holder.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "Button Clicked", Toast.LENGTH_LONG).show();
+
+                if(quizSubmitted == false){
+                    Quiz quiz = new Quiz();
+
+                    Calendar calendar = Calendar.getInstance();
+                    SimpleDateFormat mdformat = new SimpleDateFormat("yyyy / MM / dd ");
+                    String strDate = mdformat.format(calendar.getTime());
+
+                    int score = 0;
+                    quiz.setQuizDate(strDate);
+
+                    if(Boolean.TRUE.equals(answers.get(1))){
+                        quiz.setQ1("true");
+                        score += 1;
+                    }else {
+                        quiz.setQ1("false");
+                    }
+
+                    if(Boolean.TRUE.equals(answers.get(2))){
+                        quiz.setQ2("true");
+                        score += 1;
+                    }else {
+                        quiz.setQ2("false");
+                    }
+
+                    if(Boolean.TRUE.equals(answers.get(3))){
+                        quiz.setQ3("true");
+                        score += 1;
+                    }else {
+                        quiz.setQ3("false");
+                    }
+
+                    quiz.setQuizDate(strDate);
+                    if(Boolean.TRUE.equals(answers.get(4))){
+                        quiz.setQ4("true");
+                        score += 1;
+                    }else {
+                        quiz.setQ4("false");
+                    }
+
+                    quiz.setQuizDate(strDate);
+                    if(Boolean.TRUE.equals(answers.get(5))){
+                        quiz.setQ5("true");
+                        score += 1;
+                    }else {
+                        quiz.setQ5("false");
+                    }
+
+                    quiz.setQuizDate(strDate);
+                    if(Boolean.TRUE.equals(answers.get(6))){
+                        quiz.setQ6("true");
+                        score += 1;
+                    }else {
+                        quiz.setQ6("false");
+                    }
+
+                    quiz.setCorrectAnswers(score);
+
+                    QuizData quizData = new QuizData(context);
+                    quizData.open();
+                    quizData.storeQuiz(quiz);
+                    quizData.close();
+                    quizSubmitted = true;
+                }else {
+                    Toast.makeText(context, "Quiz already submitted - Go Back and start a new Quiz!", Toast.LENGTH_LONG).show();
+                }
+
             }
         });
 

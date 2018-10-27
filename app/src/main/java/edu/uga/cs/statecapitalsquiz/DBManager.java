@@ -65,6 +65,9 @@ public class DBManager extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_STATES_QUIZ);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_STORE_QUIZ);
+
         sqLiteDatabase.execSQL(CREATE_STATES_TABLE);
         Log.d( DEBUG_TAG, "Table " + TABLE_NAME_STATES_QUIZ + " created" );
         sqLiteDatabase.execSQL(CREATE_STORE_QUIZ_TABLE);
@@ -73,11 +76,7 @@ public class DBManager extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_STATES_QUIZ);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_STORE_QUIZ);
         onCreate(db);
-        Log.d( DEBUG_TAG, "Table " + TABLE_NAME_STATES_QUIZ + " upgraded" );
-        Log.d( DEBUG_TAG, "Table " + TABLE_NAME_STORE_QUIZ + " upgraded" );
     }
 
 

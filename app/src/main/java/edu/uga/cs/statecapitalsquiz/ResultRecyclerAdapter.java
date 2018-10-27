@@ -36,9 +36,18 @@ public class ResultRecyclerAdapter extends RecyclerView.Adapter<ResultRecyclerAd
     public void onBindViewHolder(ResultHolder holder, int position) {
         Quiz quiz = quizList.get(position);
 
-        String resultString = "Date: " + quiz.getQuizDate() + "; Score = " + quiz.getCorrectAnswers();
-      //  holder.result.setText(resultString);
-        holder.result.setText("test");
+        StringBuilder sb = new StringBuilder();
+        sb.append("Id        :").append(quiz.getId()).append("\n");
+        sb.append("Date      :").append(quiz.getQuizDate()).append("\n");
+        sb.append("Question1 :").append(quiz.getQ1()).append("\n");
+        sb.append("Question2 :").append(quiz.getQ2()).append("\n");
+        sb.append("Question3 :").append(quiz.getQ3()).append("\n");
+        sb.append("Question4 :").append(quiz.getQ4()).append("\n");
+        sb.append("Question5 :").append(quiz.getQ5()).append("\n");
+        sb.append("Question6 :").append(quiz.getQ6()).append("\n");
+        sb.append("Score     :").append(quiz.getCorrectAnswers());
+
+        holder.result.setText(sb.toString());
     }
 
     @Override
