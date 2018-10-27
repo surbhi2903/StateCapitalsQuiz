@@ -20,6 +20,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Recycler view adapter to display a new QuizQuestion object.
+ */
 public class QuizRecyclerAdapter extends RecyclerView.Adapter<QuizRecyclerAdapter.QuizHolder> {
 
     public static final String DEBUG_TAG = "Quiz";
@@ -31,11 +34,19 @@ public class QuizRecyclerAdapter extends RecyclerView.Adapter<QuizRecyclerAdapte
     private boolean quizSubmitted = false;
 
 
+    /**
+     * Constructor to represents a list of QuizQuestions.
+     * @param quizQuestions the list of quiz questions
+     * @param ctx
+     */
     public QuizRecyclerAdapter(List<QuizQuestion> quizQuestions, Context ctx) {
         context = ctx;
         this.quizQuestions = quizQuestions;
     }
 
+    /**
+     * Class to hold the objects represented in the RecyclerView
+     */
     class QuizHolder extends RecyclerView.ViewHolder {
 
         TextView date;
@@ -51,6 +62,10 @@ public class QuizRecyclerAdapter extends RecyclerView.Adapter<QuizRecyclerAdapte
         int currentQuestionNumber;
 
 
+        /**
+         * Constructor of QuizHolder class.
+         * @param itemView the view to be returned
+         */
         public QuizHolder(final View itemView) {
             super(itemView);
 
@@ -65,6 +80,9 @@ public class QuizRecyclerAdapter extends RecyclerView.Adapter<QuizRecyclerAdapte
             button = (Button) itemView.findViewById(R.id.button);
 
 
+            /**
+             * Listener to detect the input provided by the user.
+             */
             radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -107,6 +125,11 @@ public class QuizRecyclerAdapter extends RecyclerView.Adapter<QuizRecyclerAdapte
     }
 
 
+    /**
+     * Sets each element in the view to the appropriate values, represnted by a QuizQuestion object.
+     * @param holder The view to be set.
+     * @param position The position of the view within the RecyclerView
+     */
     @Override
     public void onBindViewHolder(QuizHolder holder, int position) {
         QuizQuestion quizQuestion = quizQuestions.get(position);
@@ -207,6 +230,10 @@ public class QuizRecyclerAdapter extends RecyclerView.Adapter<QuizRecyclerAdapte
 
     }
 
+    /**
+     * Number of items in the RecyclerView
+     * @return number of items in the view
+     */
     @Override
     public int getItemCount() { return quizQuestions.size(); }
 
