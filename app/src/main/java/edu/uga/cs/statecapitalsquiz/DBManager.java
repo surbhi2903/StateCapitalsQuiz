@@ -5,6 +5,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+/**
+ * Class used to create and manage the SQLite Database.
+ */
 public class DBManager extends SQLiteOpenHelper {
     private static final String DEBUG_TAG = "JobLeadsDBHelper";
     static final String DATABASE_NAME = "states.db";
@@ -52,10 +55,19 @@ public class DBManager extends SQLiteOpenHelper {
                     + COLUMN_CORRECT_ANSWERS + " INTEGER"
                     + ")";
 
+     /**
+     * Constructor
+     * @param context
+     */
     public DBManager(Context context) {
         super(context, DATABASE_NAME, null, DB_VERSION);
     }
-
+    
+    /**
+     * Returns an instance of a DBManager object. 
+     * @param context
+     * @return DBManager object 
+     */
     public static synchronized DBManager getInstance( Context context ) {
         if( helperInstance == null ) {
             helperInstance = new DBManager( context.getApplicationContext() );
@@ -63,6 +75,10 @@ public class DBManager extends SQLiteOpenHelper {
         return helperInstance;
     }
 
+    /**
+     * Creates the database tables.
+     * @param sqLiteDatabase the database connector
+     */
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_STATES_QUIZ);
