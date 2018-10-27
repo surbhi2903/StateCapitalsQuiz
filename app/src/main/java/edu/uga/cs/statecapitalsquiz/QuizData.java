@@ -10,6 +10,9 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a Quiz or QuizQuestion object stored in the database. 
+ */
 public class QuizData {
 
     public static final String DEBUG_TAG = "QuizData";
@@ -36,20 +39,34 @@ public class QuizData {
             DBManager.COLUMN_CITY3
     };
 
+    /**
+     * Constructor
+     * @param context
+     */
     public QuizData(Context context) {
         this.quizDbHelper = DBManager.getInstance(context);
     }
 
+    /**
+     * Open the database
+     */
     public void open() {
         db = quizDbHelper.getWritableDatabase();
     }
 
+    /**
+     * Close the database.
+     */
     public void close() {
         if (quizDbHelper != null) {
             quizDbHelper.close();
         }
     }
 
+    /**
+     * Retrieve a new list of QuizQuestions. 
+     * @return A list of Quiz Questions 
+     */
     public List<QuizQuestion> retrieveNewQuiz() {
         ArrayList<QuizQuestion> questions = new ArrayList<>();
         Cursor cursor = null;
@@ -79,6 +96,10 @@ public class QuizData {
         return questions;
     }
 
+    /**
+     * Retrieve all quiz results as a list. 
+     * @return The list of Quiz results 
+     */
     public List<Quiz> retrieveAllQuizzes() {
         ArrayList<Quiz> quizzes = new ArrayList<>();
         Cursor cursor = null;
@@ -115,6 +136,11 @@ public class QuizData {
         return quizzes;
     }
 
+    /**
+     * Store a new Quiz result in the database. 
+     * @param quiz The Quiz object to be stored in the database. 
+     * @return
+     */
     public Quiz storeQuiz(Quiz quiz) {
         ContentValues values = new ContentValues();
         values.put(DBManager.COLUMN_QUIZ_DATE, quiz.getQuizDate());
