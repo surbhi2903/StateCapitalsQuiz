@@ -13,10 +13,17 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+/**
+ * Activity to represent splash screen.
+ */
 public class MainActivity extends AppCompatActivity {
 
     public static final String MESSAGE_TYPE = "edu.uga.cs.StateCapitalsQuiz.MESSAGE_TYPE";
 
+    /**
+     * Launches the layout.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +72,9 @@ public class MainActivity extends AppCompatActivity {
         results.setOnClickListener(new ScoreClickListener());
     }
 
+    /**
+     * Button click listener to launch a new quiz.
+     */
     private class QuizClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
@@ -72,6 +82,10 @@ public class MainActivity extends AppCompatActivity {
             v.getContext().startActivity(intent);
         }
     }
+
+    /**
+     * Button click listener to view past quiz scores.
+     */
     private class ScoreClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
@@ -81,3 +95,4 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
+
