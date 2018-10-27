@@ -32,6 +32,7 @@ public class QuizRecyclerAdapter extends RecyclerView.Adapter<QuizRecyclerAdapte
     private RadioGroup lastCheckedRadioGroup = null;
     private Map<Integer,Boolean> answers = new HashMap<>();
     private boolean quizSubmitted = false;
+    private TextView currentResultView;
 
 
     /**
@@ -57,6 +58,7 @@ public class QuizRecyclerAdapter extends RecyclerView.Adapter<QuizRecyclerAdapte
         RadioButton cityThree;
         RadioButton selectedButton;
         Button button;
+        TextView resultView;
         int score = 0;
         QuizQuestion currentQuizQuestion;
         int currentQuestionNumber;
@@ -78,6 +80,7 @@ public class QuizRecyclerAdapter extends RecyclerView.Adapter<QuizRecyclerAdapte
             cityThree = (RadioButton) itemView.findViewById(R.id.stateThree);
 
             button = (Button) itemView.findViewById(R.id.button);
+            resultView = (TextView) itemView.findViewById(R.id.resultView);
 
 
             /**
@@ -137,6 +140,8 @@ public class QuizRecyclerAdapter extends RecyclerView.Adapter<QuizRecyclerAdapte
         holder.currentQuestionNumber = position + 1;
         int id = position;
         int score = 0;
+        currentResultView = holder.resultView;
+        holder.resultView.setVisibility(View.GONE);
         if (position != 5) {
             holder.button.setVisibility(View.GONE);
         }
@@ -207,6 +212,9 @@ public class QuizRecyclerAdapter extends RecyclerView.Adapter<QuizRecyclerAdapte
                     quizData.storeQuiz(quiz);
                     quizData.close();
                     quizSubmitted = true;
+                    currentResultView.setVisibility(View.VISIBLE);
+                    currentResultView.setText("Your Score is :" + quiz.getCorrectAnswers());
+
                 }else {
                     Toast.makeText(context, "Quiz already submitted - Go Back and start a new Quiz!", Toast.LENGTH_LONG).show();
                 }
@@ -224,9 +232,9 @@ public class QuizRecyclerAdapter extends RecyclerView.Adapter<QuizRecyclerAdapte
 
         holder.date.setText(strDate);
         holder.stateName.setText("What is the capital of " + quizQuestion.getQuestion() + "?");
-        holder.cityOne.setText(quizQuestion.getAnswerOne());
-        holder.cityTwo.setText(quizQuestion.getAnswerTwo());
-        holder.cityThree.setText(quizQuestion.getAnswerThree());
+        holder.cityOne.setText(quizQuestion.getAnswerTwo());
+        holder.cityTwo.setText(quizQuestion.getAnswerThree());
+        holder.cityThree.setText(quizQuestion.getAnswerFour());
 
     }
 

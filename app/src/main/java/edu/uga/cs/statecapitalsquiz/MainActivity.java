@@ -42,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
             String tableName = "States_Quiz";
 
             db.beginTransaction();
+            //skip first line
+            buffer.readLine();
             while ((line = buffer.readLine()) != null) {
                 String[] str = line.split(",");
 
@@ -49,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
                 contentValues.put("city1", str[1].trim());
                 contentValues.put("city2", str[2].trim());
                 contentValues.put("city3", str[3].trim());
+                contentValues.put("city4", str[4].trim());
 
                 db.insert(tableName, null, contentValues);
             }

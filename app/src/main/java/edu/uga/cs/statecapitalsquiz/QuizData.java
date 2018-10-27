@@ -36,7 +36,8 @@ public class QuizData {
             DBManager.COLUMN_STATE,
             DBManager.COLUMN_CITY1,
             DBManager.COLUMN_CITY2,
-            DBManager.COLUMN_CITY3
+            DBManager.COLUMN_CITY3,
+            DBManager.COLUMN_CITY4,
     };
 
     /**
@@ -79,7 +80,8 @@ public class QuizData {
                 String answerOne = cursor.getString(cursor.getColumnIndex(DBManager.COLUMN_CITY1));
                 String answerTwo = cursor.getString(cursor.getColumnIndex(DBManager.COLUMN_CITY2));
                 String answerThree = cursor.getString(cursor.getColumnIndex(DBManager.COLUMN_CITY3));
-                QuizQuestion question = new QuizQuestion(questionState, answerOne, answerTwo, answerThree);
+                String answerFour = cursor.getString(cursor.getColumnIndex(DBManager.COLUMN_CITY4));
+                QuizQuestion question = new QuizQuestion(questionState, answerOne, answerTwo, answerThree, answerFour);
                 question.setId(id);
                 questions.add(question);
             }

@@ -1,7 +1,7 @@
 package edu.uga.cs.statecapitalsquiz;
 
 /**
- * Class to represent a quiz question. 
+ * Class to represent a quiz question.
  */
 public class QuizQuestion {
 
@@ -10,9 +10,10 @@ public class QuizQuestion {
     private String answerOne;
     private String answerTwo;
     private String answerThree;
+    private String answerFour;
 
     /**
-     * Default constructor 
+     * Default constructor
      */
     public QuizQuestion() {
         this.id = -1;
@@ -20,38 +21,41 @@ public class QuizQuestion {
         this.answerOne = null;
         this.answerTwo = null;
         this.answerThree = null;
+        this.answerFour =null;
     }
 
     /**
-     * Constructor to create a quiz question 
-     * @param question The state name 
-     * @param answersOne The first answer choice 
-     * @param answerTwo The second answer choice 
-     * @param answerThree The third answer choice 
+     * Constructor to create a quiz question
+     * @param question The state name
+     * @param answersOne The first correct answer
+     * @param answerTwo The second answer choice
+     * @param answerThree The third answer choice
+     *  @param answerFour The fourth answer choice
      */
-    public QuizQuestion(String question, String answersOne, String answerTwo, String answerThree) {
+    public QuizQuestion(String question, String answersOne, String answerTwo, String answerThree, String answerFour) {
         this.id = -1;
         this.question = question;
         this.answerOne = answersOne;
         this.answerTwo = answerTwo;
         this.answerThree = answerThree;
+        this.answerFour = answerFour;
     }
 
     /**
-     * Get ID of quiz question in database. 
-     * @return the ID of the quiz quesiton 
+     * Get ID of quiz question in database.
+     * @return the ID of the quiz quesiton
      */
     public long getId() {return id;}
 
     /**
-     * Set the ID of the QuizQuestion 
+     * Set the ID of the QuizQuestion
      */
     public void setId(long id) {
         this.id = id;
     }
 
     /**
-     * Get the quiz question 
+     * Get the quiz question
      * @return the quiz question state name
      */
     public String getQuestion() {
@@ -59,55 +63,62 @@ public class QuizQuestion {
     }
 
     /**
-     * Set the quiz question 
+     * Set the quiz question
      */
     public void setQuestion(String question) {
         this.question = question;
     }
 
     /**
-     * Get the first answer choice 
+     * Get the first answer choice
      */
     public String getAnswerOne() {
         return answerOne;
     }
 
     /**
-     * Set the first answer choice 
+     * Set the first answer choice
      */
     public void setAnswerOne(String answerOne) {
         this.answerOne = answerOne;
     }
 
     /**
-     * Get the second answer choice 
-     * @return the second answer choice 
+     * Get the second answer choice
+     * @return the second answer choice
      */
     public String getAnswerTwo() {
         return answerTwo;
     }
 
     /**
-     * Set the second answer choice 
+     * Set the second answer choice
      */
     public void setAnswerTwo(String answerTwo) {
         this.answerTwo = answerTwo;
     }
 
     /**
-     * Get the third answer choice 
-     * @return the third answer choice 
+     * Get the third answer choice
+     * @return the third answer choice
      */
     public String getAnswerThree() {
         return answerThree;
     }
 
     /**
-     * Set the third answer choice 
+     * Set the third answer choice
      */
     public void setAnswerThree(String answerThree) {
         this.answerThree = answerThree;
     }
 
+    public String getAnswerFour() {
+        return answerFour;
+    }
+
+    public void setAnswerFour(String answerFour) {
+        this.answerFour = answerFour;
+    }
 }
 

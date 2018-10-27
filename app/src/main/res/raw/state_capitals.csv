@@ -1,51 +1,51 @@
-State,Capital city,Second city,Third city,,
-Alabama,Montgomery,Birmingham,Mobile,,
-Alaska,Juneau,Anchorage,Fairbanks,,
-Arizona,Phoenix,Tucson,Mesa,,
-Arkansas,Little Rock,Springdale,Conway,,
-California,Sacramento,San Diego,Los Angeles,,
-Colorado,Denver,Aurora,Fort Collins,,
-Connecticut,Hartford,Bridgeport,Norwalk,,
-Delaware,Dover,Wilmington,Newark,,
-Florida,Tallahassee,Jacksonville,Orlando,,
-Georgia,Atlanta,Columbus,Savannah,,
-Hawaii,Honolulu,Hilo,Waipahu,,
-Idaho,Boise,Nampa,Meridian,,
-Illinois,Springfield,Rockford,Chicago,,
-Indiana,Indianapolis,Evansville,Fort Wayne,,
-Iowa,Des Moines,Cedar Rapids,Davenport,,
-Kansas,Topeka,Wichita,Kansas City,,
-Kentucky,Frankfort,Louisville,Lexington,,
-Louisiana,Baton Rouge,New Orleans,Metairie,,
-Maine,Augusta,Portland,Bangor,,
-Maryland,Annapolis,Baltimore,Columbia,,
-Massachusetts,Boston,Springfield,Worcester,,
-Michigan,Lansing,Detroit,Warren,,
-Minnesota,Saint Paul,Rochester,Minneapolis,,
-Mississippi,Jackson,Gulfport,Southaven,,
-Missouri,Jefferson City,Kansas City,Springfield,,
-Montana,Helena,Billings,Missoula,,
-Nebraska,Lincoln,Omaha,Bellevue,,
-Nevada,Carson City,Las Vegas,Henderson,,
-New Hampshire,Concord,Nashua,Manchester,,
-New Jersey,Trenton,Paterson,Elizabeth,,
-New Mexico,Santa Fe,Las Cruces,Rio Rancho,,
-New York,Albany,Auburn,Amsterdam,,
-North Carolina,Raleigh,Durham,Charlotte,,
-North Dakota,Bismarck,Fargo,Minot,,
-Ohio,Columbus,Cleveland,Toledo,,
-Oklahoma,Oklahoma City,Tulsa,Norman,,
-Oregon,Salem,Portland,Eugene,,
-Pennsylvania,Harrisburg,Philadelphia,Pittsburgh,,
-Rhode Island,Providence,Warwick,Cranston,,
-South Carolina,Columbia,Charleston,Mt. Pleasant,,
-South Dakota,Pierre,Aberdeen,Brookings,,
-Tennessee,Nashville,Memphis,Knoxville,,
-Texas,Austin,Houston,Dallas,,
-Utah,Salt Lake City,West Jordan,Orem,,
-Vermont,Montpelier,Burlington,Rutland,,
-Virginia,Richmond,Norfolk,Chesapeake,,
-Washington,Olympia,Spokane,Vancouver,,
-West Virginia,Charleston,Huntington,Parkersburg,,
-Wisconsin,Madison,Milwaukee,Green Bay,,
-Wyoming,Cheyenne,Casper,Laramie,,
+State,Capital city,OptionA,OptionB,OptionC
+Alabama,Montgomery,Birmingham,Montgomery,Mobile
+Alaska,Juneau,Juneau,Fairbanks,Anchorage
+Arizona,Phoenix,Tucson,Mesa,Phoenix
+Arkansas,Little Rock,Little Rock,Conway,Springdale
+California,Sacramento,Sacramento,Los Angeles,San Diego
+Colorado,Denver,Aurora,Denver,Fort Collins
+Connecticut,Hartford,Hartford,Norwalk,Bridgeport
+Delaware,Dover,Wilmington,Dover,Newark
+Florida,Tallahassee,Tallahassee,Orlando,Jacksonville
+Georgia,Atlanta,Atlanta,Savannah,Columbus
+Hawaii,Honolulu,Hilo,Honolulu,Waipahu
+Idaho,Boise,Nampa,Boise,Meridian
+Illinois,Springfield,Rockford,Chicago,Springfield
+Indiana,Indianapolis,Evansville,Indianapolis,Fort Wayne
+Iowa,Des Moines,Cedar Rapids,Davenport,Des Moines
+Kansas,Topeka,Topeka,Kansas City,Wichita
+Kentucky,Frankfort,Louisville,Lexington,Frankfort
+Louisiana,Baton Rouge,New Orleans,Baton Rouge,Metairie
+Maine,Augusta,Augusta,Bangor,Portland
+Maryland,Annapolis,Baltimore,Columbia,Annapolis
+Massachusetts,Boston,Springfield,Boston,Worcester
+Michigan,Lansing,Lansing,Warren,Detroit
+Minnesota,Saint Paul,Rochester,Minneapolis,Saint Paul
+Mississippi,Jackson,Gulfport,Southaven,Jackson
+Missouri,Jefferson City,Jefferson City,Springfield,Kansas City
+Montana,Helena,Billings,Missoula,Helena
+Nebraska,Lincoln,Omaha,Bellevue,Lincoln
+Nevada,Carson City,Carson City,Henderson,Las Vegas
+New Hampshire,Concord,Nashua,Concord,Manchester
+New Jersey,Trenton,Paterson,Elizabeth,Trenton
+New Mexico,Santa Fe,Santa Fe,Rio Rancho,Las Cruces
+New York,Albany,Auburn,Amsterdam,Albany
+North Carolina,Raleigh,Durham,Charlotte,Raleigh
+North Dakota,Bismarck,Fargo,Minot,Bismarck
+Ohio,Columbus,Cleveland,Toledo,Columbus
+Oklahoma,Oklahoma City,Tulsa,Norman,Oklahoma City
+Oregon,Salem,Portland,Eugene,Salem
+Pennsylvania,Harrisburg,Philadelphia,Pittsburgh,Harrisburg
+Rhode Island,Providence,Providence,Cranston,Warwick
+South Carolina,Columbia,Charleston,Mt. Pleasant,Columbia
+South Dakota,Pierre,Pierre,Brookings,Aberdeen
+Tennessee,Nashville,Nashville,Knoxville,Memphis
+Texas,Austin,Austin,Dallas,Houston
+Utah,Salt Lake City,Salt Lake City,Orem,West Jordan
+Vermont,Montpelier,Montpelier,Rutland,Burlington
+Virginia,Richmond,Richmond,Chesapeake,Norfolk
+Washington,Olympia,Olympia,Vancouver,Spokane
+West Virginia,Charleston,Charleston,Parkersburg,Huntington
+Wisconsin,Madison,Madison,Green Bay,Milwaukee
+Wyoming,Cheyenne,Cheyenne,Laramie,Casper

@@ -19,6 +19,7 @@ public class DBManager extends SQLiteOpenHelper {
     public static final String COLUMN_CITY1 = "city1";
     public static final String COLUMN_CITY2 = "city2";
     public static final String COLUMN_CITY3 = "city3";
+    public static final String COLUMN_CITY4 = "city4";
 
     public static final String TABLE_NAME_STORE_QUIZ = "Store_Quiz";
     public static final String COLUMN_QUIZ_ID = "quizId";
@@ -39,7 +40,8 @@ public class DBManager extends SQLiteOpenHelper {
                     + COLUMN_STATE + " TEXT, "
                     + COLUMN_CITY1 + " TEXT, "
                     + COLUMN_CITY2 + " TEXT, "
-                    + COLUMN_CITY3 + " TEXT"
+                    + COLUMN_CITY3 + " TEXT, "
+                    + COLUMN_CITY4 + " TEXT"
                     + ")";
 
     public static final String CREATE_STORE_QUIZ_TABLE =
