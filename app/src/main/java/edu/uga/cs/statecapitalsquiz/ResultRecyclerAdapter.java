@@ -8,12 +8,22 @@ import android.widget.TextView;
 
 import java.util.List;
 
+/**
+ * Recycler view adapter to display the list of quizzes taken.
+ */
 public class ResultRecyclerAdapter extends RecyclerView.Adapter<ResultRecyclerAdapter.ResultHolder> {
 
     private List<Quiz> quizList;
 
+    /**
+     * Constructor holding the data to be represented.
+     * @param quizList
+     */
     public ResultRecyclerAdapter(List<Quiz> quizList) {this.quizList = quizList;}
 
+    /**
+     * Holds the items in the view.
+     */
     class ResultHolder extends RecyclerView.ViewHolder {
 
         TextView result;
@@ -26,12 +36,21 @@ public class ResultRecyclerAdapter extends RecyclerView.Adapter<ResultRecyclerAd
         }
     }
 
+    /**
+     * Inflate the layout that represents the Quiz Results.
+     * @return
+     */
     @Override
     public ResultHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.result_layout, null);
         return new ResultHolder(view);
     }
 
+    /**
+     * Attaches view items to the view holder.
+     * @param holder the view to be changed
+     * @param position position of the view
+     */
     @Override
     public void onBindViewHolder(ResultHolder holder, int position) {
         Quiz quiz = quizList.get(position);
@@ -50,6 +69,10 @@ public class ResultRecyclerAdapter extends RecyclerView.Adapter<ResultRecyclerAd
         holder.result.setText(sb.toString());
     }
 
+    /**
+     * Gets the number of items in the RecyclerView
+     * @return number of items in QuizList
+     */
     @Override
     public int getItemCount() {return quizList.size();}
 }
