@@ -15,6 +15,9 @@ import android.widget.TextView;
 
 import java.util.List;
 
+/**
+ * Activity for the results of quizzes.
+ */
 public class QuizResultActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
@@ -25,6 +28,10 @@ public class QuizResultActivity extends AppCompatActivity {
     private QuizData quizData = null;
     private List<Quiz> quizList;
 
+    /**
+     * Returns the layout
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,8 +45,15 @@ public class QuizResultActivity extends AppCompatActivity {
         new RetrieveQuizTask().execute();
     }
 
+    /**
+     * Class to connect to and retrieve values from the database, using the QuizData class
+     */
     public class RetrieveQuizTask extends AsyncTask<Void, Void, List<Quiz>> {
 
+        /**
+         * Runs on start of activity.
+         * @return
+         */
         @Override
         protected List<Quiz> doInBackground(Void... params) {
             quizData.open();
@@ -48,7 +62,10 @@ public class QuizResultActivity extends AppCompatActivity {
         }
 
 
-
+        /**
+         * Method is called after the database query is executed.
+         * @param quizList the list represented all quiz results
+         */
         @Override
         protected void onPostExecute(List<Quiz> quizList) {
             super.onPostExecute(quizList);
@@ -56,6 +73,10 @@ public class QuizResultActivity extends AppCompatActivity {
             recyclerView.setAdapter(recyclerAdapter);
         }
     }
+
+    /**
+     * Opens the database if application was previously closed.
+     */
     @Override
     protected void onResume() {
         if( quizData != null )
@@ -63,6 +84,9 @@ public class QuizResultActivity extends AppCompatActivity {
         super.onResume();
     }
 
+    /**
+     * Closes the database if application is paused.
+     */
     @Override
     protected void onPause() {
         if( quizData != null )
