@@ -20,6 +20,9 @@ import org.w3c.dom.Text;
 
 import java.util.List;
 
+/**
+ * Activity to return six unique quiz questions. 
+ */
 public class QuizActivity extends AppCompatActivity {
 
     public static final String DEBUG_TAG="QuizActivity";
@@ -44,6 +47,10 @@ public class QuizActivity extends AppCompatActivity {
     private RadioGroup answerGroup;
     private int numCorrect = 0;
 
+    /**
+     * Returns the layout
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,9 +81,15 @@ public class QuizActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Class to connect to and retrieve values from the database, using the QuizData class
+     */
     public class RetrieveQuizTask extends AsyncTask<Void, Void, List<QuizQuestion>> {
-
-        // This method will run as a background process to write into db.
+        
+        /**
+         * Runs on start of activity. 
+         * @return
+         */
         @Override
         protected List<QuizQuestion> doInBackground(Void... params) {
             quizData.open();
@@ -85,8 +98,10 @@ public class QuizActivity extends AppCompatActivity {
         }
 
 
-        // This method will be automatically called by Android once the db writing
-        // background process is finished.
+        /**
+         * Method is called after the database query is executed. 
+         * @param quizList the list represented all quiz questions
+         */
         @Override
         protected void onPostExecute(List<QuizQuestion> quizList) {
             super.onPostExecute(quizList);
@@ -109,6 +124,9 @@ public class QuizActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Opens the database if application was previously closed. 
+     */
     @Override
     protected void onResume() {
         Log.d(DEBUG_TAG, "");
@@ -117,10 +135,14 @@ public class QuizActivity extends AppCompatActivity {
         super.onResume();
     }
 
+    /**
+     * Closes the database if application is paused. 
+     */
     protected void onPause() {
         Log.d(DEBUG_TAG,"");
         if (quizData != null)
             quizData.close();
         super.onPause();
     }
+
 }
